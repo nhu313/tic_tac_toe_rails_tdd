@@ -39,6 +39,7 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'surrogate'
+  gem 'simplecov'
 end
 
-gem 'tic_tac_toe_nhu', '0.0.1'
+gem 'tic_tac_toe_nhu', '0.0.1', :path => '/Users/nhunguyen/Documents/Ruby/tictactoe'

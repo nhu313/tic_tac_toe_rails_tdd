@@ -1,34 +1,31 @@
-require 'games_presenter'
+require 'tic_tac_toe/web_main'
 require 'tic_tac_toe/game_factory'
 
 class GamesController < ApplicationController
-  attr_writer :presenter
-
-  def move
-    presenter.make_move(params[:move])
-    show
-  end
+  attr_writer :main
 
   def new
-    session[:game] = presenter.create_game(params[:type])
-    show
-  end
-
-  def show
-    @squares = presenter.squares
-    @in_progress = !presenter.game_over?
-    @winner = presenter.winner
-    @current_player = game.current_player
-    render action: "show"
+    session[:game] = main.create_game(params[:type])
+    board
   end
 
   def play
     @types = TicTacToe::GameFactory.new.types
   end
 
+  def move
+    main.make_move(params[:move])
+    board
+  end
+
   private
-  def presenter
-    @presenter = @presenter || GamesPresenter.new(game)
+  def board
+    @game = game
+    render action: "board"
+  end
+
+  def main
+    @main ||= TicTacToe::WebMain.new(game)
   end
 
   def game

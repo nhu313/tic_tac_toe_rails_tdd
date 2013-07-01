@@ -1,0 +1,28 @@
+<%
+if @game.over?
+  winner = @game.winner
+  if winner
+    message = "#{winner.name} wins!"
+  else
+    message = "It's a tied!"
+  end
+else
+  current_player = @game.current_player
+  message = "#{current_player.name} (#{(current_player.value)}) turns."
+end
+%>
+
+<h3><%=message%></h3>
+<table>
+<% @game.board.squares.each_with_index do |value, index| %>
+  <% if index%3 == 0 %>
+  <tr>
+  <%end%>
+    <td><%= link_to_if !@game.over? && !value, value || " ", move_path(:move=>index)
+ %></td>
+  <% if (index+1)%3 == 0 %>
+  </tr>
+  <%end%>
+<%end%>
+</table>
+<%= button_to "New game", root_path, :confirm => "Are you sure?", :method => :get %>

@@ -61,10 +61,7 @@ TddTtt::Application.routes.draw do
 
   get "games/play"
 
-  get "games/show"
-
   root :to => 'games#play'
   match 'games/new', :controller => "games", :action => "new", :as => "new"
-  match 'games/show', :controller => "games", :action => "show", :as => "show"
   match 'games/move', :controller => "games", :action => "move", :as => "move"
 end
