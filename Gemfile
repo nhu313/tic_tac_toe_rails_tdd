@@ -40,3 +40,4 @@ group :development, :test do
 end
 
 gem 'tic_tac_toe_nhu', '0.0.2'
+gem 'activerecord-postgresql-adapter'
