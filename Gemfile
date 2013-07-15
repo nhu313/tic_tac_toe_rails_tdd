@@ -34,6 +34,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'surrogate'
   gem 'simplecov'
