@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'tic_tac_toe/web_user_player'
+require 'web/tic_tac_toe/web_user_player'
 
 describe TicTacToe::WebUserPlayer do
   before(:each) do

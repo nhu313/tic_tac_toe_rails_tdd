@@ -1,7 +1,5 @@
-#Game interacter
-
 module TicTacToe
-  class WebMain
+  class GameInteractor
 
     attr_writer :game_factory
 

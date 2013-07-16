@@ -1,6 +1,6 @@
 require 'surrogate/rspec'
 
-class MockWebMain
+class MockGameInteractor
   Surrogate.endow(self)
   define(:initialize) {|game|}
   define_writer(:game_factory)

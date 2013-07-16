@@ -1,5 +1,5 @@
-require 'tic_tac_toe/web_user_player'
-require 'tic_tac_toe/web_computer_player'
+require 'web/tic_tac_toe/web_user_player'
+require 'web/tic_tac_toe/web_computer_player'
 require 'tic_tac_toe/strategy/minimax'
 
 module TicTacToe

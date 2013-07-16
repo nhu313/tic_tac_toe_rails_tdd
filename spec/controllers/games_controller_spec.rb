@@ -1,12 +1,12 @@
 require 'spec_helper'
 require 'mocks/game'
-require 'mocks/web_main'
+require 'mocks/game_interactor'
 
 describe GamesController do
   before(:each) do
     @controller = GamesController.new
     @game = MockGame.new
-    @main = MockWebMain.new(@game)
+    @main = MockGameInteractor.new(@game)
     @main.will_have_create_game @game
     @controller.main = @main
   end
@@ -16,7 +16,7 @@ describe GamesController do
   end
 
   it "checks resenter" do
-    MockWebMain.should be_substitutable_for(TicTacToe::WebMain)
+    MockGameInteractor.should be_substitutable_for(TicTacToe::GameInteractor)
   end
 
   context "new" do

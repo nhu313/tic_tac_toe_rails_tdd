@@ -1,6 +1,6 @@
 require 'spec_helper'
-require 'tic_tac_toe/web_player_factory'
-require 'tic_tac_toe/web_user_player'
+require 'web/tic_tac_toe/web_player_factory'
+require 'web/tic_tac_toe/web_user_player'
 
 describe TicTacToe::WebPlayerFactory do
   before(:each) do

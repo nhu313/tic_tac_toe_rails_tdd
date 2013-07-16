@@ -1,31 +1,31 @@
-require 'tic_tac_toe/web_main'
+require 'web/tic_tac_toe/game_interactor'
 require 'tic_tac_toe/game_factory'
 
 class GamesController < ApplicationController
   attr_writer :main
 
-  def new
-    session[:game] = main.create_game(params[:type])
-    board
-  end
-
   def play
     @types = TicTacToe::GameFactory.new.types
   end
 
+  def new
+    session[:game] = main.create_game(params[:type])
+    show_board
+  end
+
   def move
     main.make_move(params[:move])
-    board
+    show_board
   end
 
   private
-  def board
+  def show_board
     @game = game
     render action: "board"
   end
 
   def main
-    @main ||= TicTacToe::WebMain.new(game)
+    @main ||= TicTacToe::GameInteractor.new(game)
   end
 
   def game

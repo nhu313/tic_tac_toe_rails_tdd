@@ -1,15 +1,15 @@
 require 'spec_helper'
-require 'tic_tac_toe/web_main'
+require 'web/tic_tac_toe/game_interactor'
 require 'tic_tac_toe/board'
 require 'mocks/game'
 require 'mocks/web_user_player'
 require 'mocks/game_factory'
 
-describe TicTacToe::WebMain do
+describe TicTacToe::GameInteractor do
 
   before(:each) do
     @game = MockGame.new
-    @main = TicTacToe::WebMain.new(@game)
+    @main = TicTacToe::GameInteractor.new(@game)
   end
 
   context "ensure mock class has the same interface" do
