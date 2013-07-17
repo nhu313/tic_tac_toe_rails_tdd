@@ -1,3 +1,7 @@
+require 'web/tic_tac_toe/web_player_factory'
+require 'tic_tac_toe/game_factory'
+require 'tic_tac_toe/board'
+
 module TicTacToe
   class GameInteractor
 

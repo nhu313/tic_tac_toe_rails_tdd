@@ -1,8 +1,20 @@
+<%
+def game_type(type)
+  "#{player_type(type[0])} vs #{player_type(type[1])}"
+end
+
+def player_type(type)
+  return "Human" if type == :human
+  return "Computer" if type == :computer
+end
+%>
+
 <h2>Select game type</h2>
 <ul>
   <% @types.each_with_index do |value, index| %>
-    <li><%= button_to value, new_path(:type => index + 1) %></li>
+    <li><%= button_to game_type(value), new_path(:type => index + 1) %></li>
   <% end %>
 </ul>
 
 <h2><%= @message %></h2>
+
