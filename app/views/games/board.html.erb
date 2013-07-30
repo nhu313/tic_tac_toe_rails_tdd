@@ -1,9 +1,10 @@
+<h3><%=@presenter.message %></h3>
 <table>
-<% @board.squares.each_with_index do |value, index| %>
+<% @presenter.squares.each_with_index do |value, index| %>
   <% if index%3 == 0 %>
   <tr>
   <%end%>
-    <td><%= link_to_if !@presenter.game_over? && !value, value || " ", move_path(:move=>index)
+    <td><%= link_to_if @presenter.link?(value), value || " ", move_path(:move=>index)
  %></td>
   <% if (index+1)%3 == 0 %>
   </tr>

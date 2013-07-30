@@ -1,4 +1,4 @@
-require 'web/tic_tac_toe/web_player_factory'
+require 'tic_tac_toe/web/player_factory'
 require 'tic_tac_toe/game_state_factory'
 require 'tic_tac_toe/board'
 
@@ -23,14 +23,10 @@ module TicTacToe
     attr_reader :game_state
 
     def play_game(game_state)
-      until game_state.current_player.needs_input? || rules(game_state).game_over?
+      until game_state.current_player.needs_input? || game_state.game_over?
         game_state.current_player.move(game_state.board)
         game_state.change_player
       end
-    end
-
-    def rules(game_state)
-      @rules ||= TicTacToe::Rules.new(game_state.board)
     end
   end
 end

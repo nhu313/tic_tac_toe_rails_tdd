@@ -1,7 +1,7 @@
 require 'tic_tac_toe/game_state_factory'
 require 'tic_tac_toe/game_state'
-require 'presenter'
-require 'web/tic_tac_toe/web_game'
+require 'games_presenter'
+require 'tic_tac_toe/web/game'
 
 class GamesController < ApplicationController
   attr_writer :main
@@ -22,13 +22,8 @@ class GamesController < ApplicationController
 
   private
   def show_board
-    board
-    @presenter = Presenter.new(game_state)
+    @presenter = GamesPresenter.new(game_state)
     render action: "board"
-  end
-
-  def board
-    @board = session[:game_state].board
   end
 
   def game_state
