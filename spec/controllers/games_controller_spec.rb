@@ -1,22 +1,15 @@
 require 'spec_helper'
+require 'mocks/game_state'
 require 'mocks/game'
-require 'mocks/game_interactor'
 
 describe GamesController do
+  attr_reader :controller, :game, :game_state
+
   before(:each) do
     @controller = GamesController.new
-    @game = MockGame.new
-    @main = MockGameInteractor.new(@game)
-    @main.will_have_create_game @game
-    @controller.main = @main
-  end
-
-  it "checks MockGame" do
-    MockGame.should be_substitutable_for(TicTacToe::Game)
-  end
-
-  it "checks resenter" do
-    MockGameInteractor.should be_substitutable_for(TicTacToe::GameInteractor)
+    @game_state = MockGameState.new
+    @game = MockWebGame.new
+    @controller.game = @game
   end
 
   context "new" do
@@ -27,7 +20,7 @@ describe GamesController do
 
     it "creates a new game based on user input" do
       post :new, type:2
-      @main.was asked_for(:create_game).with("2")
+      game.was asked_for(:create_game_state).with(2)
     end
   end
 
@@ -39,11 +32,11 @@ describe GamesController do
 
     it "returns a list of all the available game type" do
       get :play
-      assigns[:types].should == ["You vs Computer", "Computer vs You", "You vs Friend", "Computer vs Computer"]
+      assigns[:types].should == [[:human, :computer], [:computer, :human], [:human, :human], [:computer, :computer]]
     end
   end
 
-  context "move" do
+  context "make move" do
     before (:each) do
       post :new
     end
@@ -53,14 +46,11 @@ describe GamesController do
       response.should be_success
     end
 
-    it "tells presenter to make move" do
+    it "tells game to make move" do
       move = "3"
+      request.session[:game_state] = game_state
       post :move, move: move
-      @main.was told_to(:make_move).with(move)
-    end
-
-    it "initialize game instance variable" do
-      assigns[:game].should == @game
+      game.was told_to(:make_move).with(game_state, move.to_i)
     end
   end
 

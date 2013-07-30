@@ -4,7 +4,7 @@ require 'games_presenter'
 require 'tic_tac_toe/web/game'
 
 class GamesController < ApplicationController
-  attr_writer :main
+  attr_writer :game
 
   def play
     @types = TicTacToe::GameStateFactory.new.types
@@ -31,6 +31,6 @@ class GamesController < ApplicationController
   end
 
   def game
-    TicTacToe::WebGame.new
+    @game ||= TicTacToe::WebGame.new
   end
 end

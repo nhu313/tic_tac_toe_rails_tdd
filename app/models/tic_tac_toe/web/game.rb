@@ -4,11 +4,12 @@ require 'tic_tac_toe/board'
 
 module TicTacToe
   class WebGame
+    attr_writer :game_state_factory
 
     def create_game_state(game_type)
       player_factory = TicTacToe::WebPlayerFactory.new
-      @game_factory ||= TicTacToe::GameStateFactory.new(player_factory)
-      game_state = @game_factory.create(game_type.to_i)
+      @game_state_factory ||= TicTacToe::GameStateFactory.new(player_factory)
+      game_state = @game_state_factory.create(game_type)
       play_game(game_state)
       game_state
     end

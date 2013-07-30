@@ -1,6 +1,6 @@
 require 'spec_helper'
-require 'web/tic_tac_toe/web_player_factory'
-require 'web/tic_tac_toe/web_user_player'
+require 'tic_tac_toe/web/player_factory'
+require 'tic_tac_toe/web/player'
 
 describe TicTacToe::WebPlayerFactory do
   before(:each) do
@@ -16,12 +16,8 @@ describe TicTacToe::WebPlayerFactory do
       player.value.should == value
     end
 
-    it "checks human player is a web user player" do
-      @factory.human.should be_kind_of(TicTacToe::WebUserPlayer)
-    end
-
     it "checks default human name" do
-      @factory.human.name.should == "You"
+      @factory.human.name.should == "User"
     end
 
     it "checks default human value" do
@@ -32,16 +28,16 @@ describe TicTacToe::WebPlayerFactory do
   context "computer player" do
     it "returns a computer player with given value" do
       computer_value = "Danny"
-      player = @factory.computer("board", computer_value, "opponent")
+      player = @factory.computer(computer_value)
       player.value.should == computer_value
     end
 
     it "checks computer strategy" do
-      @factory.computer("board").strategy.should be_kind_of(TicTacToe::Strategy::Minimax)
+      @factory.computer.strategy.should be_kind_of(TicTacToe::Strategy::Minimax)
     end
 
     it "checks default computer value" do
-      @factory.computer("board").value.should == "O"
+      @factory.computer.value.should == "O"
     end
   end
 end
