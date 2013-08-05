@@ -12,8 +12,7 @@ module TicTacToe
     end
 
     def make_move(player_move)
-      game.current_player.add_move(player_move.to_i) if player_move
-      game.make_move
+      game.make_move(player_move.to_i)
       play
     end
 
