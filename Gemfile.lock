@@ -1,3 +1,8 @@
+PATH
+  remote: /Users/nhunguyen/Documents/Ruby/ttt/ruby_ttt
+  specs:
+    tic_tac_toe_nhu (0.0.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,7 +115,6 @@ GEM
     sqlite3 (1.3.7)
     surrogate (0.7.0)
     thor (0.18.1)
-    tic_tac_toe_nhu (0.0.5)
     tilt (1.4.1)
     treetop (1.4.14)
       polyglot
@@ -133,5 +137,5 @@ DEPENDENCIES
   simplecov
   sqlite3
   surrogate
-  tic_tac_toe_nhu (= 0.0.5)
+  tic_tac_toe_nhu (= 0.0.10)!
   uglifier (>= 1.0.3)

@@ -40,5 +40,5 @@ group :development, :test do
   gem 'simplecov'
 end
 
-gem 'tic_tac_toe_nhu', '0.0.5'
+gem 'tic_tac_toe_nhu', '0.0.10', :path => '/Users/nhunguyen/Documents/Ruby/ttt/ruby_ttt'
 gem 'activerecord-postgresql-adapter'
