@@ -1,14 +1,12 @@
-require 'tic_tac_toe/rules'
-
 class GamesPresenter
-  attr_reader :game_state
+  attr_reader :game
 
-  def initialize(game_state)
-    @game_state = game_state
+  def initialize(game)
+    @game = game
   end
 
   def squares
-    game_state.board.squares
+    game.board.squares
   end
 
   def link?(value)
@@ -23,17 +21,17 @@ class GamesPresenter
   end
 
   private
-  attr_reader :game_state
+  attr_reader :game
 
   def winner
-    game_state.winner
+    game.winner
   end
 
   def game_over?
-    game_state.game_over?
+    game.over?
   end
 
   def current_player
-    game_state.current_player
+    game.current_player
   end
 end

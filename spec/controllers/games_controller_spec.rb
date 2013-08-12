@@ -1,15 +1,15 @@
 require 'spec_helper'
-require 'mocks/game_state'
 require 'mocks/game'
+require 'mocks/game_interactor'
 
 describe GamesController do
-  attr_reader :controller, :game, :game_state
+  attr_reader :controller, :game_interactor, :game
 
   before(:each) do
     @controller = GamesController.new
-    @game_state = MockGameState.new
-    @game = MockWebGame.new
-    @controller.game = @game
+    @game = MockGame.new
+    @game_interactor = MockWebGameInteractor.new
+    @controller.game_interactor = @game_interactor
   end
 
   context "new" do
@@ -20,7 +20,7 @@ describe GamesController do
 
     it "creates a new game based on user input" do
       post :new, type:2
-      game.was asked_for(:create_game_state).with(2)
+      game_interactor.was asked_for(:create_game).with(2)
     end
   end
 
@@ -32,7 +32,7 @@ describe GamesController do
 
     it "returns a list of all the available game type" do
       get :play
-      assigns[:types].should == [[:human, :computer], [:computer, :human], [:human, :human], [:computer, :computer]]
+      assigns[:types].should == [[:human, :human], [:human, :computer], [:computer, :human], [:computer, :computer]]
     end
   end
 
@@ -48,9 +48,9 @@ describe GamesController do
 
     it "tells game to make move" do
       move = "3"
-      request.session[:game_state] = game_state
+      request.session[:game] = game
       post :move, move: move
-      game.was told_to(:make_move).with(game_state, move.to_i)
+      game_interactor.was told_to(:make_move).with(game, move.to_i)
     end
   end
 

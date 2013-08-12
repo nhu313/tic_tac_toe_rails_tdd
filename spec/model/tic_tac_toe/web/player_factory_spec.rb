@@ -5,39 +5,50 @@ require 'tic_tac_toe/web/player'
 describe TicTacToe::WebPlayerFactory do
   before(:each) do
     @factory = TicTacToe::WebPlayerFactory.new
+    @value = TicTacToe::VALUES[0]
   end
 
   context "human player" do
-    it "returns web player with passed in values" do
-      name = "Billy"
-      value = "bill"
-      player = @factory.human(name, value)
-      player.name.should == name
-      player.value.should == value
+    before(:each) do
+      @human = @factory.human(@value)
+    end
+
+    it "should have no strategy" do
+      @human.strategy.should be_nil
+    end
+
+    it "should need input" do
+      @human.should be_needs_input
     end
 
     it "checks default human name" do
-      @factory.human.name.should == "User"
+      @human.name.should == "User"
     end
 
-    it "checks default human value" do
-      @factory.human.value.should == "X"
+    it "checks value" do
+      @human.value.should == @value
     end
   end
 
   context "computer player" do
-    it "returns a computer player with given value" do
-      computer_value = "Danny"
-      player = @factory.computer(computer_value)
-      player.value.should == computer_value
+    before(:each) do
+      @computer = @factory.computer(@value)
     end
 
-    it "checks computer strategy" do
-      @factory.computer.strategy.should be_kind_of(TicTacToe::Strategy::Minimax)
+    it "should have no strategy" do
+      @computer.strategy.should be_kind_of(TicTacToe::Strategy::Minimax)
     end
 
-    it "checks default computer value" do
-      @factory.computer.value.should == "O"
+    it "should not need input" do
+      @computer.should_not be_needs_input
+    end
+
+    it "checks default name" do
+      @computer.name.should == "Computer"
+    end
+
+    it "checks value" do
+      @computer.value.should == @value
     end
   end
 end

@@ -1,14 +1,17 @@
 require 'surrogate/rspec'
 
-class MockWebGame
+class MockGame
   Surrogate.endow(self)
-  define_writer :game_state_factory
-  define(:make_move) {|game_state, player_move|}
-  define(:create_game_state) {|type|}
+  define_reader :board
+  define_reader :current_player
+
+  define :winner
+  define(:over?){true}
+  define(:make_player_move){|*move|}
 end
 
-describe TicTacToe::WebGame do
-  it "checks if substituable" do
-    MockWebGame.should be_substitutable_for(TicTacToe::WebGame)
+describe TicTacToe::Game do
+  it "checks MockGame" do
+    MockGame.should be_substitutable_for(TicTacToe::Game)
   end
 end

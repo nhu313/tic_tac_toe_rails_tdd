@@ -1,36 +1,35 @@
-require 'tic_tac_toe/game_state_factory'
-require 'tic_tac_toe/game_state'
+require 'tic_tac_toe/game_factory'
 require 'games_presenter'
-require 'tic_tac_toe/web/game'
+require 'tic_tac_toe/web/game_interactor'
 
 class GamesController < ApplicationController
-  attr_writer :game
+  attr_writer :game_interactor
 
   def play
-    @types = TicTacToe::GameStateFactory.new.types
+    @types = TicTacToe::GameFactory.new.types
   end
 
   def new
-    session[:game_state] = game.create_game_state(params[:type].to_i)
+    session[:game] = game_interactor.create_game(params[:type].to_i)
     show_board
   end
 
   def move
-    game.make_move(game_state, params[:move].to_i)
+    game_interactor.make_move(game, params[:move].to_i)
     show_board
   end
 
   private
   def show_board
-    @presenter = GamesPresenter.new(game_state)
+    @presenter = GamesPresenter.new(game)
     render action: "board"
   end
 
-  def game_state
-    session[:game_state]
+  def game
+    session[:game]
   end
 
-  def game
-    @game ||= TicTacToe::WebGame.new
+  def game_interactor
+    @game_interactor ||= TicTacToe::WebGameInteractor.new
   end
 end
